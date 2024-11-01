@@ -31,7 +31,7 @@ vendas_df = pd.read_excel('Vendas.xlsx')    #Adicionar a tabela à uma variavel
 
 
 # #Metodo Loc
-display(vendas_df.loc[1])   #Mostra uma linha especifica a partir do indíce
+# display(vendas_df.loc[1])   #Mostra uma linha especifica a partir do indíce
 
 # #Pegar linha que corresponde a uma condição
 # display(vendas_df.loc[vendas_df['ID Loja'] == 'Norte Shopping'])    #Usar o display ja com a condição
@@ -44,8 +44,35 @@ display(vendas_df.loc[1])   #Mostra uma linha especifica a partir do indíce
 # vendas_norteshopping = vendas_df.loc[vendas_df['ID Loja'] == 'Norte Shopping', ['ID Loja', 'Produto', 'Quantidade']]  #Pegando linha e coluna especifica
 # display(vendas_norteshopping)
 
-# #Pegar valor especifico
-cam = vendas_df.loc[vendas_df['Produto'] == 'Camiseta', ['ID Loja', 'Quantidade']]  #Com a variavel
-display(cam)
 
-print(vendas_df.loc[1, 'Produto'])  #Buscando direto com Indíce e nome da coluna, irá retornar 'Camiseta'
+# #Pegar valor especifico
+# cam = vendas_df.loc[vendas_df['Produto'] == 'Camiseta', ['ID Loja', 'Quantidade']]  #Com a variavel
+# display(cam)
+
+# print(vendas_df.loc[1, 'Produto'])  #Buscando direto com Indíce e nome da coluna, irá retornar 'Camiseta'
+
+
+# #Adicionar uma coluna nova a partir de uma coluna que existe
+vendas_df['Comissão'] = vendas_df['Valor Final'] * 0.05
+# display(vendas_df)
+
+# #Criar uma coluna com valor padrão
+vendas_df.loc[:, "Imposto"] = 0
+# display(vendas_df)
+
+
+
+# #Adicionar linha
+vendas_dz_df = pd.read_excel('Vendas - Dez.xlsx')
+# display(vendas_dz_df)
+
+vendas_df = pd.concat([vendas_df, vendas_dz_df], ignore_index=True)     #Concatenar a tabela 'Vendas - Dez' com a tabela 'Vendas'
+# display(vendas_df)
+
+
+# #Excluir linhas e colunas
+vendas_df = vendas_df.drop('Imposto', axis=1)   #Axis=0 é a linha, Axis=1 é a coluna
+display(vendas_df)     #Exclui o valor 'Imposto' da coluna
+
+
+# #Tratamento de valores vazios
