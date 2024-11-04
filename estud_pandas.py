@@ -53,11 +53,11 @@ vendas_df = pd.read_excel('Vendas.xlsx')    #Adicionar a tabela à uma variavel
 
 
 # #Adicionar uma coluna nova a partir de uma coluna que existe
-vendas_df['Comissão'] = vendas_df['Valor Final'] * 0.05
+# vendas_df['Comissão'] = vendas_df['Valor Final'] * 0.05
 # display(vendas_df)
 
 # #Criar uma coluna com valor padrão
-vendas_df.loc[:, "Imposto"] = 0
+# vendas_df.loc[:, "Imposto"] = 0
 # display(vendas_df)
 
 
@@ -66,13 +66,34 @@ vendas_df.loc[:, "Imposto"] = 0
 vendas_dz_df = pd.read_excel('Vendas - Dez.xlsx')
 # display(vendas_dz_df)
 
-vendas_df = pd.concat([vendas_df, vendas_dz_df], ignore_index=True)     #Concatenar a tabela 'Vendas - Dez' com a tabela 'Vendas'
+# vendas_df = pd.concat([vendas_df, vendas_dz_df], ignore_index=True)     #Concatenar a tabela 'Vendas - Dez' com a tabela 'Vendas'
 # display(vendas_df)
 
 
 # #Excluir linhas e colunas
-vendas_df = vendas_df.drop('Imposto', axis=1)   #Axis=0 é a linha, Axis=1 é a coluna
-display(vendas_df)     #Exclui o valor 'Imposto' da coluna
+# vendas_df = vendas_df.drop('Imposto', axis=1)   #Axis=0 é a linha, Axis=1 é a coluna
+# display(vendas_df)     #Exclui o valor 'Imposto' da coluna
 
 
 # #Tratamento de valores vazios
+# #Deletando linhas e colunas completamente vazias
+# vendas_df = vendas_df.dropna(how='all', axis=1)    #Exclui linhas e colunas que forem completamente vazias
+# display(vendas_df)
+
+# #Deletar linhas que possuem pelo menos 1 valor vazio
+# vendas_df = vendas_df.dropna()  #Exclui linhas que tem pelo menos 1 valor vazio
+# display(vendas_df)
+
+# #Preencher valores vazios
+# #Preencher com a médias da coluna
+# vendas_df['Comissão'] = vendas_df['Comissão'].fillna(vendas_df['Comissão'].mean())
+# display(vendas_df)
+
+# #Preencher com o ultimo valor
+# vendas_df = vendas_df.ffill()
+display(vendas_df)
+
+
+# #Calcular indicadores
+trans_por_loja = vendas_df['ID Loja'].value_counts()
+display(trans_por_loja)
